@@ -1,10 +1,40 @@
 import React from "react";
 import Slider from "react-slick";
 import Poster from "../Poster/Poster.Component";
+import { info } from "autoprefixer";
+import { BiInfinite } from "react-icons/bi";
 
 const PosterSlider = (props) => {
     const {posters, title, subtitle, isDark} = props;
-    const settings = {};
+    const settings = {
+      infinite: true,
+      speed: 500,
+      slidesToShow: 5,
+      slidesToScroll: 4,
+      responsive:[
+        {
+          breakpoint: 1024,
+          settings:{
+            slidesToShow: 3,
+            slidesToScroll: 2,
+          }
+        },
+        {
+          breakpoint: 600,
+          settings:{
+            slidesToShow: 2,
+            slidesToScroll: 1,
+          }
+        },
+        {
+          breakpoint: 480,
+          settings:{
+            slidesToShow: 2,
+            slidesToScroll: 1,
+          }
+        }
+      ]
+    };
   return (
   <>
   <div className="flex flex-col items-start sm:ml-3 my-2">
@@ -12,8 +42,8 @@ const PosterSlider = (props) => {
     <p className={`text-sm ${isDark ? "text-white" : "text-gray-800"}`}>{subtitle}</p>
     </div>
     <Slider {...settings}>
-      {posters.map((poster) => (
-        <Poster {...poster} isDark={isDark} />
+      {posters.map((poster, index) => (
+        <Poster {...poster} isDark={isDark} key={index} />
       ))}
     </Slider>
   </>
