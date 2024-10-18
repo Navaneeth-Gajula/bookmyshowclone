@@ -1,11 +1,9 @@
 import React from "react";
 import Slider from "react-slick";
 import Poster from "../Poster/Poster.Component";
-import { BiInfinite } from "react-icons/bi";
 
 const PosterSlider = (props) => {
-  const { posters = [], title, subtitle, isDark, config } = props;
-
+  const { posters, title, subtitle, isDark, config} = props;
   const settings = {
     infinite: true,
     speed: 500,
@@ -26,30 +24,26 @@ const PosterSlider = (props) => {
           slidesToScroll: 1,
         },
       },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
     ],
   };
-
   return (
     <>
       <div className="flex flex-col items-start sm:ml-3 my-2">
-        <h3 className={`text-2xl font-bold ${isDark ? "text-white" : "text-gray-800"}`}>{title}</h3>
-        <p className={`text-sm ${isDark ? "text-white" : "text-gray-800"}`}>{subtitle}</p>
+        <h3
+          className={`text-2xl font-bold ${
+            isDark ? "text-white" : "text-black"
+          }`}
+        >
+          {title}
+        </h3>
+        <p className={`text-sm  ${isDark ? "text-white" : "text-gray-800"}`}>
+          {subtitle}
+        </p>
       </div>
       <Slider {...settings}>
-        {posters.length ? (
-          posters.map((poster, index) => (
-            <Poster {...poster} isDark={isDark} key={index} />
-          ))
-        ) : (
-          <div>No posters available</div>
-        )}
+        {posters.map((each, index) => (
+          <Poster {...each} isDark={isDark} key={index} />
+        ))}
       </Slider>
     </>
   );
